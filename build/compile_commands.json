@@ -1,0 +1,8 @@
+[
+{
+  "directory": "D:/document/GitHub_program/jyouhou_kadai/build",
+  "command": "D:\\document\\GitHub_program\\private\\compiler\\C\\mingw64\\bin\\gcc.exe  @CMakeFiles/Jyouhou_kadai.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\Jyouhou_kadai.dir\\app\\Src\\main.c.obj -c D:\\document\\GitHub_program\\jyouhou_kadai\\app\\Src\\main.c",
+  "file": "D:/document/GitHub_program/jyouhou_kadai/app/Src/main.c",
+  "output": "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj"
+}
+]

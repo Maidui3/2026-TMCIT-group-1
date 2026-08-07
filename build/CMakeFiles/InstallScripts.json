@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/document/GitHub_program/jyouhou_kadai/build/cmake_install.cmake",
+		"D:/document/GitHub_program/jyouhou_kadai/build/toolchain/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
