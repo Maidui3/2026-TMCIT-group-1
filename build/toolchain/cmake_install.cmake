@@ -1,4 +1,4 @@
-# Install script for directory: D:/document/GitHub_program/jyouhou_kadai/toolchain
+# Install script for directory: D:/document/2026-TMCIT-group-1/toolchain
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,6 +40,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/document/GitHub_program/jyouhou_kadai/build/toolchain/install_local_manifest.txt"
+  file(WRITE "D:/document/2026-TMCIT-group-1/build/toolchain/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

@@ -1,4 +1,4 @@
-# Install script for directory: D:/document/GitHub_program/jyouhou_kadai
+# Install script for directory: D:/document/2026-TMCIT-group-1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,13 +39,18 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/document/GitHub_program/jyouhou_kadai/build/toolchain/cmake_install.cmake")
+  include("D:/document/2026-TMCIT-group-1/build/toolchain/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("D:/document/2026-TMCIT-group-1/build/SDL-release-3.4.14/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/document/GitHub_program/jyouhou_kadai/build/install_local_manifest.txt"
+  file(WRITE "D:/document/2026-TMCIT-group-1/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -61,6 +66,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/document/GitHub_program/jyouhou_kadai/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "D:/document/2026-TMCIT-group-1/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

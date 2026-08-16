@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/document/GitHub_program/jyouhou_kadai/app/Src/main.c" "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj" "gcc" "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj.d"
+  "D:/document/2026-TMCIT-group-1/app/Src/main.c" "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj" "gcc" "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,0 +1,3 @@
+SDL-release-3.4.14/CMakeFiles/SDL3-shared.dir/src/render/vitagxm/SDL_render_vita_gxm.c.obj: \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\vitagxm\SDL_render_vita_gxm.c \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/SDL_internal.h

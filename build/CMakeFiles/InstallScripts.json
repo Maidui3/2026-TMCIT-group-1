@@ -1,8 +1,9 @@
 {
 	"InstallScripts" : 
 	[
-		"D:/document/GitHub_program/jyouhou_kadai/build/cmake_install.cmake",
-		"D:/document/GitHub_program/jyouhou_kadai/build/toolchain/cmake_install.cmake"
+		"D:/document/2026-TMCIT-group-1/build/cmake_install.cmake",
+		"D:/document/2026-TMCIT-group-1/build/toolchain/cmake_install.cmake",
+		"D:/document/2026-TMCIT-group-1/build/SDL-release-3.4.14/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

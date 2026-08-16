@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.2.1)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 
@@ -20,6 +20,8 @@ enable_language(C CXX)
 add_executable(${CMAKE_PROJECT_NAME})
 
 add_subdirectory(toolchain)
+add_subdirectory(SDL-release-3.4.14)
+
 
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE)
 
@@ -33,4 +35,5 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     app
+    SDL3::SDL3
 )

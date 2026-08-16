@@ -8,7 +8,6 @@ set(Mlink_Programmer_Src
 
 set(Mlink_Programmer_Inc
     ${CMAKE_CURRENT_SOURCE_DIR}/../app/Inc/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../SDL-release-3.4.14/include/
 )
 
 add_library(app INTERFACE)

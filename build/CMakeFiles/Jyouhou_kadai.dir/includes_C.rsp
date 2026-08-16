@@ -1,1 +1,1 @@
--ID:/document/GitHub_program/jyouhou_kadai/toolchain/../app/Inc -I"D:/document/GitHub_program/jyouhou_kadai/toolchain/../SDL-release-3.4.14/include"
+-I"D:/document/2026-TMCIT-group-1/toolchain/../app/Inc" -I"D:/document/2026-TMCIT-group-1/build/SDL-release-3.4.14/include-revision" -I"D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include"

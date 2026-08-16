@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/core/windows/version.rc
+winresrc.h
+D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/core/windows/winresrc.h
+

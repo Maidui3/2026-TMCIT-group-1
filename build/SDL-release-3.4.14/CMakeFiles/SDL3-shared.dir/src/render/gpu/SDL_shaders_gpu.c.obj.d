@@ -1,0 +1,20 @@
+SDL-release-3.4.14/CMakeFiles/SDL3-shared.dir/src/render/gpu/SDL_shaders_gpu.c.obj: \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\SDL_shaders_gpu.c \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/SDL_internal.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\SDL_shaders_gpu.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/spir-v.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/color.frag.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/linepoint.vert.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/texture_advanced.frag.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/texture_rgb.frag.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/texture_rgba.frag.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/tri_color.vert.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/tri_texture.vert.spv.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/color.frag.dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/linepoint.vert.dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/texture_advanced.frag.dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/texture_rgb.frag.dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/texture_rgba.frag.dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/tri_color.vert.dxil.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\render\gpu\shaders/tri_texture.vert.dxil.h

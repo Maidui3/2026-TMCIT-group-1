@@ -1,0 +1,21 @@
+SDL-release-3.4.14/CMakeFiles/SDL3-shared.dir/src/video/SDL_surface.c.obj: \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_surface.c \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/SDL_internal.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_sysvideo.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_vulkan.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_stdinc.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_error.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_video.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_begin_code.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_close_code.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_surface_c.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_blit.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_video_c.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_RLEaccel_c.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_pixels_c.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_rotate.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_stb_c.h \
+ D:\document\2026-TMCIT-group-1\SDL-release-3.4.14\src\video\SDL_yuv_c.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/render/SDL_sysrender.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/video/SDL_surface_c.h \
+ D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/render/SDL_yuv_sw_c.h

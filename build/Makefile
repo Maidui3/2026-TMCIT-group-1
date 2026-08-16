@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\document\GitHub_program\jyouhou_kadai
+CMAKE_SOURCE_DIR = D:\document\2026-TMCIT-group-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\document\GitHub_program\jyouhou_kadai\build
+CMAKE_BINARY_DIR = D:\document\2026-TMCIT-group-1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,16 +86,16 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\GitHub_program\jyouhou_kadai\build\CMakeFiles D:\document\GitHub_program\jyouhou_kadai\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\2026-TMCIT-group-1\build\CMakeFiles D:\document\2026-TMCIT-group-1\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\GitHub_program\jyouhou_kadai\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\2026-TMCIT-group-1\build\CMakeFiles 0
 .PHONY : all
 
 # The main codegen target
 codegen: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\GitHub_program\jyouhou_kadai\build\CMakeFiles D:\document\GitHub_program\jyouhou_kadai\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\2026-TMCIT-group-1\build\CMakeFiles D:\document\2026-TMCIT-group-1\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 codegen
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\GitHub_program\jyouhou_kadai\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\document\2026-TMCIT-group-1\build\CMakeFiles 0
 .PHONY : codegen
 
 # The main clean target
@@ -119,6 +119,7 @@ preinstall/fast:
 
 # clear depends
 depend:
+	$(CMAKE_COMMAND) -P D:\document\2026-TMCIT-group-1\build\CMakeFiles\VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
@@ -134,6 +135,45 @@ Jyouhou_kadai: cmake_check_build_system
 Jyouhou_kadai/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Jyouhou_kadai.dir\build.make CMakeFiles/Jyouhou_kadai.dir/build
 .PHONY : Jyouhou_kadai/fast
+
+#=============================================================================
+# Target rules for targets named SDL3-shared
+
+# Build rule for target.
+SDL3-shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 SDL3-shared
+.PHONY : SDL3-shared
+
+# fast build rule for target.
+SDL3-shared/fast:
+	$(MAKE) $(MAKESILENT) -f SDL-release-3.4.14\CMakeFiles\SDL3-shared.dir\build.make SDL-release-3.4.14/CMakeFiles/SDL3-shared.dir/build
+.PHONY : SDL3-shared/fast
+
+#=============================================================================
+# Target rules for targets named SDL3_test
+
+# Build rule for target.
+SDL3_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 SDL3_test
+.PHONY : SDL3_test
+
+# fast build rule for target.
+SDL3_test/fast:
+	$(MAKE) $(MAKESILENT) -f SDL-release-3.4.14\CMakeFiles\SDL3_test.dir\build.make SDL-release-3.4.14/CMakeFiles/SDL3_test.dir/build
+.PHONY : SDL3_test/fast
+
+#=============================================================================
+# Target rules for targets named SDL_uclibc
+
+# Build rule for target.
+SDL_uclibc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 SDL_uclibc
+.PHONY : SDL_uclibc
+
+# fast build rule for target.
+SDL_uclibc/fast:
+	$(MAKE) $(MAKESILENT) -f SDL-release-3.4.14\CMakeFiles\SDL_uclibc.dir\build.make SDL-release-3.4.14/CMakeFiles/SDL_uclibc.dir/build
+.PHONY : SDL_uclibc/fast
 
 app/Src/main.obj: app/Src/main.c.obj
 .PHONY : app/Src/main.obj
@@ -169,6 +209,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Jyouhou_kadai
+	@echo ... SDL3-shared
+	@echo ... SDL3_test
+	@echo ... SDL_uclibc
 	@echo ... app/Src/main.obj
 	@echo ... app/Src/main.i
 	@echo ... app/Src/main.s
@@ -183,6 +226,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
+	$(CMAKE_COMMAND) -P D:\document\2026-TMCIT-group-1\build\CMakeFiles\VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
