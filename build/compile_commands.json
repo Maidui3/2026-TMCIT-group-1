@@ -6,6 +6,12 @@
   "output": "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj"
 },
 {
+  "directory": "D:/document/2026-TMCIT-group-1/build",
+  "command": "D:\\document\\GitHub_program\\private\\compiler\\C\\mingw64\\bin\\gcc.exe  @CMakeFiles/Jyouhou_kadai.dir/includes_C.rsp -g -std=gnu99 -o CMakeFiles\\Jyouhou_kadai.dir\\app\\Src\\rpg.c.obj -c D:\\document\\2026-TMCIT-group-1\\app\\Src\\rpg.c",
+  "file": "D:/document/2026-TMCIT-group-1/app/Src/rpg.c",
+  "output": "CMakeFiles/Jyouhou_kadai.dir/app/Src/rpg.c.obj"
+},
+{
   "directory": "D:/document/2026-TMCIT-group-1/build/SDL-release-3.4.14",
   "command": "D:\\document\\GitHub_program\\private\\compiler\\C\\mingw64\\bin\\gcc.exe -DDEBUG -DUSING_GENERATED_CONFIG_H @CMakeFiles/SDL_uclibc.dir/includes_C.rsp -g -std=gnu99 -gdwarf-4 -Wall -Wundef -Wfloat-conversion -fno-strict-aliasing -Wshadow -Wno-unused-local-typedefs -Wimplicit-fallthrough -fdiagnostics-color=always -o CMakeFiles\\SDL_uclibc.dir\\src\\libm\\e_atan2.c.obj -c D:\\document\\2026-TMCIT-group-1\\SDL-release-3.4.14\\src\\libm\\e_atan2.c",
   "file": "D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/src/libm/e_atan2.c",

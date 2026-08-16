@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj"
   "CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj.d"
+  "CMakeFiles/Jyouhou_kadai.dir/app/Src/rpg.c.obj"
+  "CMakeFiles/Jyouhou_kadai.dir/app/Src/rpg.c.obj.d"
   "Jyouhou_kadai.exe"
   "Jyouhou_kadai.exe.manifest"
   "Jyouhou_kadai.pdb"

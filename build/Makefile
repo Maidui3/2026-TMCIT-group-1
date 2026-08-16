@@ -199,6 +199,30 @@ app/Src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Jyouhou_kadai.dir\build.make CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.s
 .PHONY : app/Src/main.c.s
 
+app/Src/rpg.obj: app/Src/rpg.c.obj
+.PHONY : app/Src/rpg.obj
+
+# target to build an object file
+app/Src/rpg.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Jyouhou_kadai.dir\build.make CMakeFiles/Jyouhou_kadai.dir/app/Src/rpg.c.obj
+.PHONY : app/Src/rpg.c.obj
+
+app/Src/rpg.i: app/Src/rpg.c.i
+.PHONY : app/Src/rpg.i
+
+# target to preprocess a source file
+app/Src/rpg.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Jyouhou_kadai.dir\build.make CMakeFiles/Jyouhou_kadai.dir/app/Src/rpg.c.i
+.PHONY : app/Src/rpg.c.i
+
+app/Src/rpg.s: app/Src/rpg.c.s
+.PHONY : app/Src/rpg.s
+
+# target to generate assembly for a file
+app/Src/rpg.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Jyouhou_kadai.dir\build.make CMakeFiles/Jyouhou_kadai.dir/app/Src/rpg.c.s
+.PHONY : app/Src/rpg.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -215,6 +239,9 @@ help:
 	@echo ... app/Src/main.obj
 	@echo ... app/Src/main.i
 	@echo ... app/Src/main.s
+	@echo ... app/Src/rpg.obj
+	@echo ... app/Src/rpg.i
+	@echo ... app/Src/rpg.s
 .PHONY : help
 
 

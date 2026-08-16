@@ -221,4 +221,5 @@ CMakeFiles/Jyouhou_kadai.dir/app/Src/main.c.obj: \
  D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_main.h \
  D:/document/2026-TMCIT-group-1/SDL-release-3.4.14/include/SDL3/SDL_main_impl.h \
  D:/document/GitHub_program/private/compiler/C/mingw64/x86_64-w64-mingw32/include/stdio.h \
- D:/document/GitHub_program/private/compiler/C/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h
+ D:/document/GitHub_program/private/compiler/C/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ D:/document/2026-TMCIT-group-1/app/Inc/rpg.h
