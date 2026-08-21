@@ -21,6 +21,7 @@ add_executable(${CMAKE_PROJECT_NAME})
 
 add_subdirectory(toolchain)
 add_subdirectory(SDL-release-3.4.14)
+add_subdirectory(SDL_image-release-3.4.4)
 
 
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE)
@@ -36,4 +37,5 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 target_link_libraries(${CMAKE_PROJECT_NAME}
     app
     SDL3::SDL3
+    SDL3_image::SDL3_image
 )

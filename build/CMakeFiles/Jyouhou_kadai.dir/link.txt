@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Jyouhou_kadai.dir/objects.a
-D:\document\GitHub_program\private\compiler\C\mingw64\bin\ar.exe qc CMakeFiles\Jyouhou_kadai.dir/objects.a @CMakeFiles\Jyouhou_kadai.dir\objects1.rsp
-D:\document\GitHub_program\private\compiler\C\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\Jyouhou_kadai.dir/objects.a -Wl,--no-whole-archive -o Jyouhou_kadai.exe -Wl,--out-implib,libJyouhou_kadai.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Jyouhou_kadai.dir\linkLibs.rsp
