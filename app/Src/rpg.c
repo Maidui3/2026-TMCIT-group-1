@@ -18,13 +18,58 @@
 #include "rpg.h"
 
 #define RPG_Game_Version 1.0f
+#define RPG_texture_num  1
 
 void version();
-SDL_Window* window         = NULL;
-SDL_Renderer* renderer     = NULL;
-SDL_GPUDevice* gpu_deveice = NULL;
-int window_x_size          = 0;
-int window_y_size          = 0;
+RPG_State_t SDL_SetUp_GPU();
+SDL_Window* window                    = NULL;
+SDL_Renderer* renderer                = NULL;
+SDL_GPUDevice* gpu_deveice            = NULL;
+SDL_IOStream* iostream_world          = NULL;
+SDL_GPUCommandBuffer* gpu_command_buf = NULL;
+SDL_GPUTexture* gpu_texture           = NULL;
+SDL_GPUCopyPass* gpu_copy_pass        = NULL;
+int window_x_size                     = 0;
+int window_y_size                     = 0;
+int opened_texture_num                = 0;
+
+RPG_State_t SDL_SetUp_GPU()
+{
+    renderer = SDL_CreateGPURenderer(gpu_deveice, window);
+    if (renderer == NULL) {
+        return RPG_Error;
+    }
+
+    gpu_deveice = SDL_GetGPURendererDevice(renderer);
+    if (gpu_deveice == NULL) {
+        return RPG_Error;
+    }
+
+    gpu_command_buf = SDL_AcquireGPUCommandBuffer(gpu_deveice);
+    if (gpu_command_buf == NULL) {
+        return RPG_Error;
+    }
+
+    gpu_copy_pass = SDL_BeginGPUCopyPass(gpu_command_buf);
+    if (gpu_copy_pass == NULL) {
+        return RPG_Error;
+    }
+
+    gpu_texture =
+        IMG_LoadGPUTexture(gpu_deveice, gpu_copy_pass, "../../texture/Copilot_20260821_173248.png", &window_x_size, &window_y_size);
+    if (gpu_texture == NULL) {
+        return RPG_Error;
+    }
+
+    opened_texture_num++;
+    printf("Open texture file %d/%d", opened_texture_num, RPG_texture_num);
+
+    if (!SDL_SubmitGPUCommandBuffer(gpu_command_buf)) {
+        return RPG_Error;
+    }
+
+    return RPG_OK;
+}
 
 RPG_State_t RPG_Init()
 {
@@ -45,11 +90,11 @@ RPG_State_t RPG_Init()
     printf("window x size %d \r\n", window_x_size);
     printf("window y size %d \r\n", window_y_size);
 
-    renderer = SDL_CreateGPURenderer(gpu_deveice, window);
-    if (renderer == NULL) {
+    if (SDL_SetUp_GPU() != RPG_OK) {
         return RPG_Error;
     }
 
+    printf("\r\n");
     return RPG_OK;
 }
 

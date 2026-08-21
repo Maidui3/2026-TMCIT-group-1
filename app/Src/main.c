@@ -18,8 +18,6 @@
 #include "rpg.h"
 #define DEBUG_MODE
 
-/*build ファイルは消さないように　cmakeの構成がめっちゃ重い*/
-
 int main(int argc, char* argv[])
 {
     printf("\r\n");
@@ -33,15 +31,18 @@ int main(int argc, char* argv[])
 
     if (RPG_Init() != RPG_OK) {
         printf(SDL_GetError());
-        SDL_Quit();
+        printf("\r\n");
+        RPG_Quit();
         printf("setup error");
+        printf("\r\n");
         return 1;
     }
 
     while (1) {
         if (RPG_Loop() != RPG_OK) {
             printf(SDL_GetError());
-            SDL_Quit();
+            printf("\r\n");
+            RPG_Quit();
             printf("loop error");
             return 1;
         }
