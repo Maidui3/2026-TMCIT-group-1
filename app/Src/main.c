@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 #include "rpg.h"
-#define DEBUG_MODE
+// #define DEBUG_MODE
 
 int main(int argc, char* argv[])
 {
@@ -33,8 +33,7 @@ int main(int argc, char* argv[])
         printf(SDL_GetError());
         printf("\r\n");
         RPG_Quit();
-        printf("setup error");
-        printf("\r\n");
+        printf("setup error\r\n");
         return 1;
     }
 
@@ -43,11 +42,13 @@ int main(int argc, char* argv[])
             printf(SDL_GetError());
             printf("\r\n");
             RPG_Quit();
-            printf("loop error");
+            printf("loop error\r\n");
             return 1;
         }
 
-        SDL_Delay(1000);
+        SDL_Delay(10);
+
+        if (SDL_HasEvent(SDL_EVENT_QUIT)) break;
 
 #ifdef DEBUG_MODE
         break;
@@ -55,6 +56,7 @@ int main(int argc, char* argv[])
     }
 
     RPG_Quit();
+    printf("fin");
 
     return 0;
 }

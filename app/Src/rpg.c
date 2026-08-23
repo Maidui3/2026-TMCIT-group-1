@@ -16,60 +16,23 @@
 //
 
 #include "rpg.h"
+#include "rpg_texture_loader.h"
+#include "rpg_window_render.h"
 
 #define RPG_Game_Version 1.0f
 #define RPG_texture_num  1
 
 void version();
-RPG_State_t SDL_SetUp_GPU();
-SDL_Window* window                    = NULL;
-SDL_Renderer* renderer                = NULL;
-SDL_GPUDevice* gpu_deveice            = NULL;
-SDL_IOStream* iostream_world          = NULL;
-SDL_GPUCommandBuffer* gpu_command_buf = NULL;
-SDL_GPUTexture* gpu_texture           = NULL;
-SDL_GPUCopyPass* gpu_copy_pass        = NULL;
-int window_x_size                     = 0;
-int window_y_size                     = 0;
-int opened_texture_num                = 0;
+SDL_Window* window;
+RPG_Win_Render_Handler_t render_handle;
 
-RPG_State_t SDL_SetUp_GPU()
-{
-    renderer = SDL_CreateGPURenderer(gpu_deveice, window);
-    if (renderer == NULL) {
-        return RPG_Error;
-    }
-
-    gpu_deveice = SDL_GetGPURendererDevice(renderer);
-    if (gpu_deveice == NULL) {
-        return RPG_Error;
-    }
-
-    gpu_command_buf = SDL_AcquireGPUCommandBuffer(gpu_deveice);
-    if (gpu_command_buf == NULL) {
-        return RPG_Error;
-    }
-
-    gpu_copy_pass = SDL_BeginGPUCopyPass(gpu_command_buf);
-    if (gpu_copy_pass == NULL) {
-        return RPG_Error;
-    }
-
-    gpu_texture =
-        IMG_LoadGPUTexture(gpu_deveice, gpu_copy_pass, "../../texture/Copilot_20260821_173248.png", &window_x_size, &window_y_size);
-    if (gpu_texture == NULL) {
-        return RPG_Error;
-    }
-
-    opened_texture_num++;
-    printf("Open texture file %d/%d", opened_texture_num, RPG_texture_num);
-
-    if (!SDL_SubmitGPUCommandBuffer(gpu_command_buf)) {
-        return RPG_Error;
-    }
-
-    return RPG_OK;
-}
+// texture = IMG_LoadGPUTexture(deveice, copypass, "texture/Copilot_20260821_173248.png", &window_x_size, &window_y_size);
+// if (texture == NULL) {
+//     return RPG_Error;
+// }
+//
+// opened_texture_num++;
+// printf("Open texture file %d/%d", opened_texture_num, RPG_texture_num);
 
 RPG_State_t RPG_Init()
 {
@@ -78,19 +41,22 @@ RPG_State_t RPG_Init()
     if (!SDL_InitSubSystem(((SDL_InitFlags)SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS))) {
         return RPG_Error;
     }
+    /*SDL初期化*/
 
     window = SDL_CreateWindow(Application_NAME, 100, 100, SDL_WINDOW_FULLSCREEN);
     if (window == NULL) {
         return RPG_Error;
     }
+    /*ウィンドウを作成*/
 
-    if (!SDL_GetWindowSize(window, &window_x_size, &window_y_size)) {
+    if (!SDL_GetWindowSize(window, &render_handle.window_x_size, &render_handle.window_y_size)) {
         return RPG_Error;
     }
-    printf("window x size %d \r\n", window_x_size);
-    printf("window y size %d \r\n", window_y_size);
+    /*ウィンドウの縦横のサイズを取得*/
+    printf("window x size %d \r\n", render_handle.window_x_size);
+    printf("window y size %d \r\n", render_handle.window_y_size);
 
-    if (SDL_SetUp_GPU() != RPG_OK) {
+    if (RPG_Window_Render_Init(&render_handle, window) != RPG_OK) {
         return RPG_Error;
     }
 
@@ -100,11 +66,16 @@ RPG_State_t RPG_Init()
 
 RPG_State_t RPG_Loop()
 {
+    if (RPG_Window_Render_Update(&render_handle, window) != RPG_Render_OK) {
+        return RPG_Error;
+    }
+
     return RPG_OK;
 }
 
 RPG_State_t RPG_Quit()
 {
+    RPG_Window_Render_Qnit(&render_handle, window);
     SDL_Quit();
     return RPG_OK;
 }

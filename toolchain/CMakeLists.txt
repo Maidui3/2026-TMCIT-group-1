@@ -5,6 +5,8 @@ enable_language(C CXX)
 set(Mlink_Programmer_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../app/Src/main.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../app/Src/rpg.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../app/Src/rpg_texture_loader.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../app/Src/rpg_window_render.c
 )
 
 set(Mlink_Programmer_Inc
