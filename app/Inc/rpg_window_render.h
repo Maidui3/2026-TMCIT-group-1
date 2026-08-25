@@ -26,10 +26,10 @@ typedef struct {
     int window_y_size;
 } RPG_Win_Render_Handler_t;
 
-RPG_State_t RPG_Window_Render_Init(SDL_Renderer* renderer, SDL_Window* window, back_light_t* back_light);
-RPG_State_t RPG_Window_Render_main_Upadte(SDL_Renderer* renderer, RPG_Win_Render_Handler_t* x_Render);
-RPG_State_t RPG_Window_Render_back_Update(SDL_Renderer* renderer, RPG_Win_Render_Handler_t* x_Render);
-RPG_State_t RPG_Window_Render_Qnit(SDL_Renderer* renderer);
+RPG_State_t RPG_Window_Render_Init(SDL_Renderer** renderer, SDL_Window* window, back_light_t* back_light);
+RPG_State_t RPG_Window_Render_main_Upadte(SDL_Renderer** renderer, RPG_Win_Render_Handler_t* x_Render);
+RPG_State_t RPG_Window_Render_back_Update(SDL_Renderer** renderer, RPG_Win_Render_Handler_t* x_Render);
+RPG_State_t RPG_Window_Render_Qnit(SDL_Renderer** renderer);
 RPG_State_t RPG_Window_Render_Error();
 
 #endif

@@ -26,7 +26,7 @@ typedef enum {
     enamy4,
 } texture_map_t;
 
-RPG_State_t RPG_Texture_Loader(SDL_Renderer* renderer, RPG_Win_Render_Handler_t* x_Render, texture_map_t map);
+RPG_State_t RPG_Texture_Loader(SDL_Renderer** renderer, RPG_Win_Render_Handler_t* x_Render, texture_map_t map);
 RPG_State_t RPG_Texture_Loader_Qnit(RPG_Win_Render_Handler_t* x_Render);
 RPG_State_t RPG_Texture_Loader_Error();
 

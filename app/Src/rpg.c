@@ -63,17 +63,17 @@ RPG_State_t RPG_Init()
     back_light.G = 0xFF;
     back_light.B = 0xFF;
 
-    if (RPG_Window_Render_Init(renderer, window, &back_light) != RPG_OK) {
+    if (RPG_Window_Render_Init(&renderer, window, &back_light) != RPG_OK) {
         return RPG_Error;
     }
 
-    if (RPG_Texture_Loader(renderer, &back_renderer, MAP_1) != RPG_OK) {
+    if (RPG_Texture_Loader(&renderer, &back_renderer, MAP_1) != RPG_OK) {
         return RPG_Error;
     }
 
-    // if (RPG_Texture_Loader(renderer, &charactor_renderer, chara) != RPG_OK) {
-    //     return RPG_Error;
-    // }
+    if (RPG_Texture_Loader(&renderer, &charactor_renderer, chara) != RPG_OK) {
+        return RPG_Error;
+    }
 
     back_renderer.src.x = 0;
     back_renderer.src.y = 0;
@@ -111,16 +111,17 @@ RPG_State_t RPG_Loop()
         last_tick_key = SDL_GetTicks();
     }
 
-    RPG_Window_Render_main_Upadte(renderer, &charactor_renderer);
+    RPG_Window_Render_main_Upadte(&renderer, &charactor_renderer);
 
-    RPG_Window_Render_back_Update(renderer, &back_renderer);
+    RPG_Window_Render_back_Update(&renderer, &back_renderer);
+    SDL_RenderPresent(renderer);
 
     return RPG_OK;
 }
 
 RPG_State_t RPG_Quit()
 {
-    RPG_Window_Render_Qnit(renderer);
+    RPG_Window_Render_Qnit(&renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
     return RPG_OK;

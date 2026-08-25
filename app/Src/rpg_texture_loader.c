@@ -18,7 +18,7 @@
 
 #include "rpg_window_render.h"
 
-RPG_State_t RPG_Texture_Loader(SDL_Renderer* renderer, RPG_Win_Render_Handler_t* x_Render, texture_map_t map)
+RPG_State_t RPG_Texture_Loader(SDL_Renderer** renderer, RPG_Win_Render_Handler_t* x_Render, texture_map_t map)
 {
     SDL_IOStream* iostream;
     bool png_or_jpg;
@@ -77,7 +77,7 @@ RPG_State_t RPG_Texture_Loader(SDL_Renderer* renderer, RPG_Win_Render_Handler_t*
         return RPG_Texture_Loader_Error();
     }
 
-    x_Render->texture = SDL_CreateTextureFromSurface(renderer, x_Render->surface);
+    x_Render->texture = SDL_CreateTextureFromSurface(*renderer, x_Render->surface);
     if (x_Render->texture == NULL) {
         printf("here\r\n");
         return RPG_Texture_Loader_Error();
