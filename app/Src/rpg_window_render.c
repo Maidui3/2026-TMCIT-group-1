@@ -16,43 +16,47 @@
 #include <SDL3_image/SDL_image.h>
 #include <stdio.h>
 
-RPG_Texture_Render_t RPG_Window_Render_Init(RPG_Win_Render_Handler_t* x_Render, SDL_Window* window)
+RPG_State_t RPG_Window_Render_Init(SDL_Renderer* renderer, SDL_Window* window, back_light_t* back_light)
 {
     if (!SDL_IsMainThread()) {
         return RPG_Window_Render_Error();
     }
 
-    x_Render->renderer = SDL_CreateRenderer(window, NULL);
-    if (x_Render->renderer == NULL) {
+    renderer = SDL_CreateRenderer(window, NULL);
+    if (renderer == NULL) {
         return RPG_Window_Render_Error();
     }
 
-    x_Render->texture = SDL_CreateTexture(x_Render->renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_TARGET, 100, 100);
-    if (x_Render->texture == NULL) {
-        return RPG_Window_Render_Error();
-    }
+    SDL_SetRenderDrawColor(renderer, back_light->R, back_light->G, back_light->B, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(renderer);
 
-    return RPG_Render_OK;
+    return RPG_OK;
 }
 
-RPG_Texture_Render_t RPG_Window_Render_Update(RPG_Win_Render_Handler_t* x_Render, SDL_Window* window)
+RPG_State_t RPG_Window_Render_main_Upadte(SDL_Renderer* renderer, RPG_Win_Render_Handler_t* x_Render)
 {
-    return RPG_Render_OK;
+    SDL_RenderTexture(renderer, x_Render->texture, NULL, &x_Render->src_main);
+
+    return RPG_OK;
 }
 
-RPG_Texture_Render_t RPG_Window_Render_Qnit(RPG_Win_Render_Handler_t* x_Render, SDL_Window* window)
+RPG_State_t RPG_Window_Render_back_Update(SDL_Renderer* renderer, RPG_Win_Render_Handler_t* x_Render)
 {
-    SDL_DestroyRenderer(x_Render->renderer);
+    SDL_RenderTexture(renderer, x_Render->texture, &x_Render->src, NULL);
+    SDL_RenderPresent(renderer);
 
-    return RPG_Render_OK;
+    return RPG_OK;
 }
 
-RPG_Texture_Render_t RPG_Window_Render_Error()
+RPG_State_t RPG_Window_Render_Qnit(SDL_Renderer* renderer)
 {
-    printf(SDL_GetError());
-    printf("\r\n");
+    SDL_DestroyRenderer(renderer);
+    return RPG_OK;
+}
+
+RPG_State_t RPG_Window_Render_Error()
+{
     printf("render error");
     printf("\r\n");
-
-    return RPG_Render_Error;
+    return RPG_Error;
 }

@@ -24,21 +24,24 @@
 
 void version();
 SDL_Window* window;
-RPG_Win_Render_Handler_t render_handle;
 
-// texture = IMG_LoadGPUTexture(deveice, copypass, "texture/Copilot_20260821_173248.png", &window_x_size, &window_y_size);
-// if (texture == NULL) {
-//     return RPG_Error;
-// }
-//
-// opened_texture_num++;
-// printf("Open texture file %d/%d", opened_texture_num, RPG_texture_num);
+SDL_Renderer* renderer;
+RPG_Win_Render_Handler_t back_renderer;
+RPG_Win_Render_Handler_t charactor_renderer;
+
+back_light_t back_light = {0, 0, 0};
+const bool* key;
+
+uint64_t last_tick_render;
+uint64_t last_tick_key;
+
+bool bit_map[1920][1080];
 
 RPG_State_t RPG_Init()
 {
     version();
 
-    if (!SDL_InitSubSystem(((SDL_InitFlags)SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS))) {
+    if (!SDL_InitSubSystem((SDL_InitFlags)(SDL_INIT_VIDEO | SDL_INIT_EVENTS))) {
         return RPG_Error;
     }
     /*SDL初期化*/
@@ -49,33 +52,76 @@ RPG_State_t RPG_Init()
     }
     /*ウィンドウを作成*/
 
-    if (!SDL_GetWindowSize(window, &render_handle.window_x_size, &render_handle.window_y_size)) {
+    if (!SDL_GetWindowSize(window, &back_renderer.window_x_size, &back_renderer.window_y_size)) {
         return RPG_Error;
     }
     /*ウィンドウの縦横のサイズを取得*/
-    printf("window x size %d \r\n", render_handle.window_x_size);
-    printf("window y size %d \r\n", render_handle.window_y_size);
+    printf("window x size %d \r\n", back_renderer.window_x_size);
+    printf("window y size %d \r\n", back_renderer.window_y_size);
 
-    if (RPG_Window_Render_Init(&render_handle, window) != RPG_OK) {
+    back_light.R = 0xFF;
+    back_light.G = 0xFF;
+    back_light.B = 0xFF;
+
+    if (RPG_Window_Render_Init(renderer, window, &back_light) != RPG_OK) {
         return RPG_Error;
     }
 
-    printf("\r\n");
+    if (RPG_Texture_Loader(renderer, &back_renderer, MAP_1) != RPG_OK) {
+        return RPG_Error;
+    }
+
+    // if (RPG_Texture_Loader(renderer, &charactor_renderer, chara) != RPG_OK) {
+    //     return RPG_Error;
+    // }
+
+    back_renderer.src.x = 0;
+    back_renderer.src.y = 0;
+    back_renderer.src.w = back_renderer.surface->w / 4;
+    back_renderer.src.h = back_renderer.surface->h / 4;
+
+    key = SDL_GetKeyboardState(NULL);
+
     return RPG_OK;
 }
 
+#define character_speed 1.0f
+
 RPG_State_t RPG_Loop()
 {
-    if (RPG_Window_Render_Update(&render_handle, window) != RPG_Render_OK) {
-        return RPG_Error;
+    if (SDL_GetTicks() - last_tick_key >= 10) {
+        if (key[SDL_SCANCODE_W]) {
+            if (back_renderer.src.y > 0.0f) {
+                back_renderer.src.y -= character_speed;
+            }
+        } else if (key[SDL_SCANCODE_S]) {
+            if (back_renderer.src.y < (float)(back_renderer.surface->h - back_renderer.src.h)) {
+                back_renderer.src.y += character_speed;
+            }
+        }
+        if (key[SDL_SCANCODE_A]) {
+            if (back_renderer.src.x > 0.0f) {
+                back_renderer.src.x -= character_speed;
+            }
+        } else if (key[SDL_SCANCODE_D]) {
+            if (back_renderer.src.x < (float)(back_renderer.surface->w - back_renderer.src.w)) {
+                back_renderer.src.x += character_speed;
+            }
+        }
+        last_tick_key = SDL_GetTicks();
     }
+
+    RPG_Window_Render_main_Upadte(renderer, &charactor_renderer);
+
+    RPG_Window_Render_back_Update(renderer, &back_renderer);
 
     return RPG_OK;
 }
 
 RPG_State_t RPG_Quit()
 {
-    RPG_Window_Render_Qnit(&render_handle, window);
+    RPG_Window_Render_Qnit(renderer);
+    SDL_DestroyWindow(window);
     SDL_Quit();
     return RPG_OK;
 }

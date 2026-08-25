@@ -20,6 +20,8 @@
 
 int main(int argc, char* argv[])
 {
+    SDL_Event event;
+
     printf("\r\n");
     printf("MODE -> ");
 
@@ -46,9 +48,10 @@ int main(int argc, char* argv[])
             return 1;
         }
 
-        SDL_Delay(10);
-
-        if (SDL_HasEvent(SDL_EVENT_QUIT)) break;
+        SDL_PollEvent(&event);
+        if (event.type == SDL_EVENT_QUIT) {
+            break;
+        }
 
 #ifdef DEBUG_MODE
         break;
@@ -56,7 +59,7 @@ int main(int argc, char* argv[])
     }
 
     RPG_Quit();
-    printf("fin");
+    printf("closed");
 
     return 0;
 }
