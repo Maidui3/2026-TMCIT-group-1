@@ -27,8 +27,13 @@ RPG_State_t RPG_Window_Render_Init(SDL_Renderer* renderer, SDL_Window* window, b
         return RPG_Window_Render_Error();
     }
 
-    SDL_SetRenderDrawColor(renderer, back_light->R, back_light->G, back_light->B, SDL_ALPHA_OPAQUE);
-    SDL_RenderClear(renderer);
+    if (!SDL_SetRenderDrawColor(renderer, back_light->R, back_light->G, back_light->B, SDL_ALPHA_OPAQUE)) {
+        return RPG_Window_Render_Error();
+    }
+    if (!SDL_RenderClear(renderer)) {
+        return RPG_Window_Render_Error();
+    }
+    SDL_RenderPresent(renderer);
 
     return RPG_OK;
 }
