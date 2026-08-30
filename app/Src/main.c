@@ -9,57 +9,10 @@
  *
  */
 
-#include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h>
-// #define SDL_MAIN_USE_CALLBACKS 1
-#include <SDL3/SDL_main.h>
 #include <stdio.h>
-
+#include <stdint.h>
 #include "rpg.h"
-// #define DEBUG_MODE
 
-int main(int argc, char* argv[])
-{
-    SDL_Event event;
-
-    printf("\r\n");
-    printf("MODE -> ");
-
-#ifdef DEBUG_MODE
-    printf("DEBUG\r\n");
-#else
-    printf("RELEASE\r\n");
-#endif
-
-    if (RPG_Init() != RPG_OK) {
-        printf(SDL_GetError());
-        printf("\r\n");
-        RPG_Quit();
-        printf("setup error\r\n");
-        return 1;
-    }
-
-    while (1) {
-        if (RPG_Loop() != RPG_OK) {
-            printf(SDL_GetError());
-            printf("\r\n");
-            RPG_Quit();
-            printf("loop error\r\n");
-            return 1;
-        }
-
-        SDL_PollEvent(&event);
-        if (event.type == SDL_EVENT_QUIT) {
-            break;
-        }
-
-#ifdef DEBUG_MODE
-        break;
-#endif
-    }
-
-    RPG_Quit();
-    printf("closed");
-
-    return 0;
+int main(){
+    return  0;
 }

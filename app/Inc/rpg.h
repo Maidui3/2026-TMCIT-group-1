@@ -12,20 +12,10 @@
 #ifndef _RPG_H_
 #define _RPG_H_
 
-#define Application_NAME "jyouhou_kadai"
-#include "SDL3/SDL_stdinc.h"
+#include <stdio.h>
+#include <stdint.h>
 
-typedef enum {
-    RPG_OK,
-    RPG_Error,
-} RPG_State_t;
-
-typedef struct {
-    Uint8 R, G, B;
-} back_light_t;
-
-RPG_State_t RPG_Init();
-RPG_State_t RPG_Loop();
-RPG_State_t RPG_Quit();
+void setup();
+void loop();
 
 #endif
