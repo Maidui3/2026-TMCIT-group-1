@@ -35,7 +35,7 @@ const bool* key;
 uint64_t last_tick_render;
 uint64_t last_tick_key;
 
-bool bit_map[1920][1080];
+extern bit_map_t map_border;
 
 RPG_State_t RPG_Init()
 {
@@ -59,9 +59,9 @@ RPG_State_t RPG_Init()
     printf("window x size %d \r\n", back_renderer.window_x_size);
     printf("window y size %d \r\n", back_renderer.window_y_size);
 
-    back_light.R = 0xFF;
-    back_light.G = 0xFF;
-    back_light.B = 0xFF;
+    back_light.R = 0x00;
+    back_light.G = 0x00;
+    back_light.B = 0x00;
 
     if (RPG_Window_Render_Init(&renderer, window, &back_light) != RPG_OK) {
         return RPG_Error;
@@ -80,40 +80,74 @@ RPG_State_t RPG_Init()
     back_renderer.src.w = back_renderer.surface->w / 4;
     back_renderer.src.h = back_renderer.surface->h / 4;
 
+    charactor_renderer.src.x = 0;
+    charactor_renderer.src.y = 0;
+    charactor_renderer.src.w = 270;
+    charactor_renderer.src.h = 270;
+
+    SDL_SetTextureScaleMode(back_renderer.texture, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(charactor_renderer.texture, SDL_SCALEMODE_NEAREST);
+
     key = SDL_GetKeyboardState(NULL);
+
+    if (RPG_Map_Loader(&map_border, MAP_1) != RPG_OK) {
+        return RPG_Error;
+    }
 
     return RPG_OK;
 }
 
-#define character_speed 1.0f
+#define character_speed_X 0.0005f
+#define character_speed_Y 0.001f
+#define Boarder_X         0.75f
+#define Boarder_Y         0.75f
 
 RPG_State_t RPG_Loop()
 {
     if (SDL_GetTicks() - last_tick_key >= 10) {
         if (key[SDL_SCANCODE_W]) {
             if (back_renderer.src.y > 0.0f) {
-                back_renderer.src.y -= character_speed;
+                back_renderer.src.y -= (back_renderer.surface->h * character_speed_Y);
+            } else {
+                back_renderer.src.y = 0;
+            }
+            if (map_border.bit_map[(uint8_t)back_renderer.src.x][(uint8_t)(back_renderer.src.y / 10.0f) - 1] != ' ') {
+                back_renderer.src.y += (back_renderer.surface->h * character_speed_Y);
             }
         } else if (key[SDL_SCANCODE_S]) {
             if (back_renderer.src.y < (float)(back_renderer.surface->h - back_renderer.src.h)) {
-                back_renderer.src.y += character_speed;
+                back_renderer.src.y += (back_renderer.surface->h * character_speed_Y);
+            } else {
+                back_renderer.src.y = 0;
+            }
+            if (map_border.bit_map[(uint8_t)back_renderer.src.x][(uint8_t)(back_renderer.src.y / 10.0f) - 1] != ' ') {
+                back_renderer.src.y -= (back_renderer.surface->h * character_speed_Y);
             }
         }
         if (key[SDL_SCANCODE_A]) {
             if (back_renderer.src.x > 0.0f) {
-                back_renderer.src.x -= character_speed;
+                back_renderer.src.x -= (back_renderer.surface->w * character_speed_X);
+            } else {
+                back_renderer.src.x = 0;
+            }
+            if (map_border.bit_map[(uint8_t)(back_renderer.src.x / 10.0f) - 1][(uint8_t)back_renderer.src.y] != ' ') {
+                back_renderer.src.x += (back_renderer.surface->w * character_speed_X);
             }
         } else if (key[SDL_SCANCODE_D]) {
             if (back_renderer.src.x < (float)(back_renderer.surface->w - back_renderer.src.w)) {
-                back_renderer.src.x += character_speed;
+                back_renderer.src.x += (back_renderer.surface->w * character_speed_X);
+            } else {
+                back_renderer.src.x = 0;
+            }
+            if (map_border.bit_map[(uint8_t)(back_renderer.src.x / 10.0f) - 1][(uint8_t)back_renderer.src.y] != ' ') {
+                back_renderer.src.x -= (back_renderer.surface->w * character_speed_X);
             }
         }
         last_tick_key = SDL_GetTicks();
     }
 
-    RPG_Window_Render_main_Upadte(&renderer, &charactor_renderer);
-
     RPG_Window_Render_back_Update(&renderer, &back_renderer);
+    RPG_Window_Render_main_Upadte(&renderer, &charactor_renderer);
     SDL_RenderPresent(renderer);
 
     return RPG_OK;

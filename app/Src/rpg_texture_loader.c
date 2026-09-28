@@ -89,6 +89,44 @@ RPG_State_t RPG_Texture_Loader(SDL_Renderer** renderer, RPG_Win_Render_Handler_t
     return RPG_OK;
 }
 
+RPG_State_t RPG_Map_Loader(bit_map_t* map_border_p, texture_map_t map)
+{
+    FILE* fp;
+
+    switch (map) {
+        case MAP_1:
+            fp = fopen("bit_map/MAP_1.txt", "r");
+            break;
+
+        case MAP_2:
+            fp = fopen("bit_map/MAP_2.txt", "r");
+            break;
+
+        case MAP_3:
+            fp = fopen("bit_map/MAP_3.txt", "r");
+            break;
+
+        default:
+            printf("map value error");
+            return RPG_Error;
+    }
+
+    if (fp == NULL) {
+        printf("bit_map is cannot opened");
+        return RPG_Error;
+    }
+
+    for (uint8_t i = 1; i < 109; i++) {
+        if (fgets((char*)map_border_p->bit_map[i - 1], 192, fp) == NULL) {
+            printf("fp cannot read line->%d\r\n", i);
+        }
+
+        fclose(fp);
+    }
+
+    return RPG_OK;
+}
+
 RPG_State_t RPG_Texture_Loader_Qnit(RPG_Win_Render_Handler_t* x_Render)
 {
     SDL_DestroyTexture(x_Render->texture);

@@ -24,6 +24,10 @@ typedef struct {
     Uint8 R, G, B;
 } back_light_t;
 
+typedef struct {
+    char bit_map[108][192];
+} bit_map_t;
+
 RPG_State_t RPG_Init();
 RPG_State_t RPG_Loop();
 RPG_State_t RPG_Quit();

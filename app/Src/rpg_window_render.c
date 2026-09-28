@@ -40,7 +40,7 @@ RPG_State_t RPG_Window_Render_Init(SDL_Renderer** renderer, SDL_Window* window, 
 
 RPG_State_t RPG_Window_Render_main_Upadte(SDL_Renderer** renderer, RPG_Win_Render_Handler_t* x_Render)
 {
-    SDL_RenderTexture(*renderer, x_Render->texture, NULL, &x_Render->src_main);
+    SDL_RenderTexture(*renderer, x_Render->texture, NULL, &x_Render->src);
 
     return RPG_OK;
 }

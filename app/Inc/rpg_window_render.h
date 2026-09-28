@@ -20,7 +20,6 @@
 typedef struct {
     SDL_Texture* texture;
     SDL_FRect src;
-    SDL_FRect src_main;
     SDL_Surface* surface;
     int window_x_size;
     int window_y_size;
