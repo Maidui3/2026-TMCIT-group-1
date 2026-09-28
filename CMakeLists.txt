@@ -18,10 +18,25 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 enable_language(C CXX)
 
 add_executable(${CMAKE_PROJECT_NAME})
+include(FetchContent)
+FetchContent_Declare(
+    SDL3
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG        release-3.4.16
+    GIT_PROGRESS TRUE
+)
+
+FetchContent_Declare(
+    SDL3_image
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
+    GIT_TAG        release-3.4.6
+    GIT_PROGRESS TRUE
+)
+set(BUILD_SHARED_LIBS ON CACHE INTERNAL "BUILD Shared libraries")
+
+FetchContent_MakeAvailable(SDL3 SDL3_image)
 
 add_subdirectory(toolchain)
-add_subdirectory(SDL-release-3.4.14)
-add_subdirectory(SDL_image-release-3.4.4)
 
 
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE)
@@ -33,9 +48,17 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE)
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE)
 
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
-
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
     app
     SDL3::SDL3
     SDL3_image::SDL3_image
 )
+if(WIN32)
+    add_custom_command(
+        TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_RUNTIME_DLLS:${CMAKE_PROJECT_NAME}>
+            $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>
+        COMMAND_EXPAND_LISTS
+    )
+endif()
