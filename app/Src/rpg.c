@@ -35,7 +35,7 @@ const bool* key;
 uint64_t last_tick_render;
 uint64_t last_tick_key;
 
-extern bit_map_t map_border;
+bit_map_t map_border;
 
 RPG_State_t RPG_Init()
 {
@@ -97,53 +97,80 @@ RPG_State_t RPG_Init()
     return RPG_OK;
 }
 
-#define character_speed_X 0.0005f
-#define character_speed_Y 0.001f
-#define Boarder_X         0.75f
-#define Boarder_Y         0.75f
+#define character_speed_X 15.0f
+#define character_speed_Y 10.0f
+#define back_speed_X      0.8f
+#define back_speed_Y      1.0f
+#define character_offset  200.0f
+#define Boarder_X         500.0f
+#define Boarder_Y         500.0f
+
+#define NO_MOVE '-'
+#define ENEMY   'A'
+#define MOVE    ' '
+
+#define YP 14.2f
 
 RPG_State_t RPG_Loop()
 {
     if (SDL_GetTicks() - last_tick_key >= 10) {
         if (key[SDL_SCANCODE_W]) {
-            if (back_renderer.src.y > 0.0f) {
-                back_renderer.src.y -= (back_renderer.surface->h * character_speed_Y);
+            charactor_renderer.src.y -= character_speed_Y;
+            if (Boarder_Y >= charactor_renderer.src.y) {
+                charactor_renderer.src.y += character_speed_Y;
+                back_renderer.src.y -= back_speed_Y;
+                if (back_renderer.src.y <= 0) {
+                    back_renderer.src.y += back_speed_Y;
+                } else {
+                    if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                        back_renderer.src.y += back_speed_Y;
+                    }
+                }
             } else {
-                back_renderer.src.y = 0;
-            }
-            if (map_border.bit_map[(uint8_t)back_renderer.src.x][(uint8_t)(back_renderer.src.y / 10.0f) - 1] != ' ') {
-                back_renderer.src.y += (back_renderer.surface->h * character_speed_Y);
+                if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                    charactor_renderer.src.y += character_speed_Y;
+                }
             }
         } else if (key[SDL_SCANCODE_S]) {
-            if (back_renderer.src.y < (float)(back_renderer.surface->h - back_renderer.src.h)) {
-                back_renderer.src.y += (back_renderer.surface->h * character_speed_Y);
+            charactor_renderer.src.y += character_speed_Y;
+            if (back_renderer.window_y_size - character_offset - Boarder_Y <= charactor_renderer.src.y) {
+                charactor_renderer.src.y -= character_speed_Y;
+                back_renderer.src.y += back_speed_Y;
+                if (back_renderer.src.y >= back_renderer.surface->h / 1.4f) {
+                    back_renderer.src.y -= back_speed_Y;
+                } else {
+                    if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                        back_renderer.src.y -= back_speed_Y;
+                    }
+                }
             } else {
-                back_renderer.src.y = 0;
-            }
-            if (map_border.bit_map[(uint8_t)back_renderer.src.x][(uint8_t)(back_renderer.src.y / 10.0f) - 1] != ' ') {
-                back_renderer.src.y -= (back_renderer.surface->h * character_speed_Y);
+                if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                    charactor_renderer.src.y -= character_speed_Y;
+                }
             }
         }
         if (key[SDL_SCANCODE_A]) {
-            if (back_renderer.src.x > 0.0f) {
-                back_renderer.src.x -= (back_renderer.surface->w * character_speed_X);
-            } else {
-                back_renderer.src.x = 0;
-            }
-            if (map_border.bit_map[(uint8_t)(back_renderer.src.x / 10.0f) - 1][(uint8_t)back_renderer.src.y] != ' ') {
-                back_renderer.src.x += (back_renderer.surface->w * character_speed_X);
+            charactor_renderer.src.x -= character_speed_X;
+            if (Boarder_X >= charactor_renderer.src.x) {
+                charactor_renderer.src.x += character_speed_X;
+                back_renderer.src.x -= back_speed_X;
+                if (back_renderer.src.x <= 0) {
+                    back_renderer.src.x += back_speed_X;
+                }
             }
         } else if (key[SDL_SCANCODE_D]) {
-            if (back_renderer.src.x < (float)(back_renderer.surface->w - back_renderer.src.w)) {
-                back_renderer.src.x += (back_renderer.surface->w * character_speed_X);
-            } else {
-                back_renderer.src.x = 0;
-            }
-            if (map_border.bit_map[(uint8_t)(back_renderer.src.x / 10.0f) - 1][(uint8_t)back_renderer.src.y] != ' ') {
-                back_renderer.src.x -= (back_renderer.surface->w * character_speed_X);
+            charactor_renderer.src.x += character_speed_X;
+            if (back_renderer.window_x_size - character_offset - Boarder_X <= charactor_renderer.src.x) {
+                charactor_renderer.src.x -= character_speed_X;
+                back_renderer.src.x += back_speed_X;
+                if (back_renderer.src.x >= back_renderer.surface->w / 1.4f) {
+                    back_renderer.src.x -= back_speed_X;
+                }
             }
         }
         last_tick_key = SDL_GetTicks();
+        printf("ichi y -> %f \r\n", back_renderer.src.y);
+        printf("ichi x -> %f \r\n", back_renderer.src.x);
     }
 
     RPG_Window_Render_back_Update(&renderer, &back_renderer);

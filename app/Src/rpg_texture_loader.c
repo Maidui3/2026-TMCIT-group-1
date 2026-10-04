@@ -92,6 +92,7 @@ RPG_State_t RPG_Texture_Loader(SDL_Renderer** renderer, RPG_Win_Render_Handler_t
 RPG_State_t RPG_Map_Loader(bit_map_t* map_border_p, texture_map_t map)
 {
     FILE* fp;
+    char len[96];
 
     switch (map) {
         case MAP_1:
@@ -116,13 +117,15 @@ RPG_State_t RPG_Map_Loader(bit_map_t* map_border_p, texture_map_t map)
         return RPG_Error;
     }
 
-    for (uint8_t i = 1; i < 109; i++) {
-        if (fgets((char*)map_border_p->bit_map[i - 1], 192, fp) == NULL) {
+    for (uint8_t i = 1; i < 55; i++) {
+        if (fgets(len, 96, fp) == NULL) {
             printf("fp cannot read line->%d\r\n", i);
         }
-
-        fclose(fp);
+        for (uint8_t j = 0; j < 96; j++) {
+            map_border_p->bit_map[i][j] = len[j];
+        }
     }
+    fclose(fp);
 
     return RPG_OK;
 }
