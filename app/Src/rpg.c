@@ -101,15 +101,15 @@ RPG_State_t RPG_Init()
 #define character_speed_Y 10.0f
 #define back_speed_X      0.8f
 #define back_speed_Y      1.0f
-#define character_offset  200.0f
-#define Boarder_X         500.0f
-#define Boarder_Y         500.0f
+#define character_offset  100.0f
+#define Boarder_X         (float)(back_renderer.window_x_size) * 0.2f
+#define Boarder_Y         (float)(back_renderer.window_y_size) * 0.15f
 
 #define NO_MOVE '-'
 #define ENEMY   'A'
 #define MOVE    ' '
 
-#define YP 14.2f
+#define YP 20.0f
 
 RPG_State_t RPG_Loop()
 {
@@ -169,8 +169,6 @@ RPG_State_t RPG_Loop()
             }
         }
         last_tick_key = SDL_GetTicks();
-        printf("ichi y -> %f \r\n", back_renderer.src.y);
-        printf("ichi x -> %f \r\n", back_renderer.src.x);
     }
 
     RPG_Window_Render_back_Update(&renderer, &back_renderer);

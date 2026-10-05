@@ -118,12 +118,15 @@ RPG_State_t RPG_Map_Loader(bit_map_t* map_border_p, texture_map_t map)
     }
 
     for (uint8_t i = 1; i < 55; i++) {
-        if (fgets(len, 96, fp) == NULL) {
+        if (fgets(len, 98, fp) == NULL) {
             printf("fp cannot read line->%d\r\n", i);
         }
+        printf("%d -> ",i);
         for (uint8_t j = 0; j < 96; j++) {
             map_border_p->bit_map[i][j] = len[j];
+            printf("%c",len[j]);
         }
+        printf("\r\n");
     }
     fclose(fp);
 
