@@ -32,7 +32,7 @@ RPG_Win_Render_Handler_t charactor_renderer;
 back_light_t back_light = {0, 0, 0};
 const bool* key;
 
-uint64_t last_tick_render;
+uint64_t last_tick_map;
 uint64_t last_tick_key;
 
 bit_map_t map_border;
@@ -75,13 +75,13 @@ RPG_State_t RPG_Init()
         return RPG_Error;
     }
 
-    back_renderer.src.x = 0;
-    back_renderer.src.y = 0;
+    back_renderer.src.x = back_renderer.surface->w / 2.6f;
+    back_renderer.src.y = back_renderer.surface->h * 0.7f;
     back_renderer.src.w = back_renderer.surface->w / 4;
     back_renderer.src.h = back_renderer.surface->h / 4;
 
-    charactor_renderer.src.x = 0;
-    charactor_renderer.src.y = 0;
+    charactor_renderer.src.x = back_renderer.window_x_size / 2.1f;
+    charactor_renderer.src.y = back_renderer.window_y_size * 0.6f;
     charactor_renderer.src.w = 270;
     charactor_renderer.src.h = 270;
 
@@ -102,14 +102,18 @@ RPG_State_t RPG_Init()
 #define back_speed_X      0.8f
 #define back_speed_Y      1.0f
 #define character_offset  100.0f
-#define Boarder_X         (float)(back_renderer.window_x_size) * 0.2f
-#define Boarder_Y         (float)(back_renderer.window_y_size) * 0.15f
+#define Boarder_X         (float)(back_renderer.window_x_size) * 0.1f
+#define Boarder_Y         (float)(back_renderer.window_y_size) * 0.1f
 
 #define NO_MOVE '-'
 #define ENEMY   'A'
 #define MOVE    ' '
 
 #define YP 20.0f
+#define XP 20.0f
+
+#define PX_M (back_renderer.src.x / XP + charactor_renderer.src.x / 8.0f / 14.0f)
+#define PY_M (back_renderer.src.y / YP + charactor_renderer.src.y / 8.0f / 13.0f)
 
 RPG_State_t RPG_Loop()
 {
@@ -122,13 +126,15 @@ RPG_State_t RPG_Loop()
                 if (back_renderer.src.y <= 0) {
                     back_renderer.src.y += back_speed_Y;
                 } else {
-                    if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                    if (map_border.bit_map[(uint32_t)(PY_M)-1][(uint32_t)(PX_M)] == NO_MOVE) {
                         back_renderer.src.y += back_speed_Y;
+                    } else if (map_border.bit_map[(uint32_t)(PY_M)-1][(uint32_t)(PX_M)] == ENEMY) {
                     }
                 }
             } else {
-                if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                if (map_border.bit_map[(uint32_t)(PY_M)-1][(uint32_t)(PX_M)] == NO_MOVE) {
                     charactor_renderer.src.y += character_speed_Y;
+                } else if (map_border.bit_map[(uint32_t)(PY_M)-1][(uint32_t)(PX_M)] == ENEMY) {
                 }
             }
         } else if (key[SDL_SCANCODE_S]) {
@@ -139,13 +145,15 @@ RPG_State_t RPG_Loop()
                 if (back_renderer.src.y >= back_renderer.surface->h / 1.4f) {
                     back_renderer.src.y -= back_speed_Y;
                 } else {
-                    if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                    if (map_border.bit_map[(uint32_t)(PY_M) + 1][(uint32_t)(PX_M)] == NO_MOVE) {
                         back_renderer.src.y -= back_speed_Y;
+                    } else if (map_border.bit_map[(uint32_t)(PY_M) + 1][(uint32_t)(PX_M)] == ENEMY) {
                     }
                 }
             } else {
-                if (map_border.bit_map[(uint32_t)((back_renderer.src.y) / YP)][(uint32_t)((back_renderer.src.x) / YP)] == NO_MOVE) {
+                if (map_border.bit_map[(uint32_t)(PY_M) + 1][(uint32_t)(PX_M)] == NO_MOVE) {
                     charactor_renderer.src.y -= character_speed_Y;
+                } else if (map_border.bit_map[(uint32_t)(PY_M) + 1][(uint32_t)(PX_M)] == ENEMY) {
                 }
             }
         }
@@ -156,6 +164,16 @@ RPG_State_t RPG_Loop()
                 back_renderer.src.x -= back_speed_X;
                 if (back_renderer.src.x <= 0) {
                     back_renderer.src.x += back_speed_X;
+                } else {
+                    if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M)-1] == NO_MOVE) {
+                        back_renderer.src.x += back_speed_X;
+                    } else if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M)-1] == ENEMY) {
+                    }
+                }
+            } else {
+                if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M)-1] == NO_MOVE) {
+                    charactor_renderer.src.x += character_speed_X;
+                } else if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M)-1] == ENEMY) {
                 }
             }
         } else if (key[SDL_SCANCODE_D]) {
@@ -165,10 +183,30 @@ RPG_State_t RPG_Loop()
                 back_renderer.src.x += back_speed_X;
                 if (back_renderer.src.x >= back_renderer.surface->w / 1.4f) {
                     back_renderer.src.x -= back_speed_X;
+                } else {
+                    if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M) + 1] == NO_MOVE) {
+                        back_renderer.src.x -= back_speed_X;
+                    } else if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M) + 1] == ENEMY) {
+                    }
+                }
+            } else {
+                if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M) + 1] == NO_MOVE) {
+                    charactor_renderer.src.x -= character_speed_X;
+                } else if (map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M) + 1] == ENEMY) {
                 }
             }
         }
+        printf("%c | ", map_border.bit_map[(uint32_t)(PY_M)][(uint32_t)(PX_M)]);
+        printf("%d X | ", (uint32_t)(PX_M));
+        printf("%d Y \r\n", (uint32_t)(PY_M));
         last_tick_key = SDL_GetTicks();
+    }
+
+    if (SDL_GetTicks() - last_tick_map >= 1000) {
+        // if (RPG_Map_Loader(&map_border, MAP_1) != RPG_OK) {
+        //     return RPG_Error;
+        // }
+        last_tick_map = SDL_GetTicks();
     }
 
     RPG_Window_Render_back_Update(&renderer, &back_renderer);

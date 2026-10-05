@@ -25,7 +25,7 @@ typedef struct {
 } back_light_t;
 
 typedef struct {
-    char bit_map[54][96];
+    char bit_map[60][96];
 } bit_map_t;
 
 RPG_State_t RPG_Init();

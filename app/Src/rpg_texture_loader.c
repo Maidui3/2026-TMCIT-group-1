@@ -116,15 +116,16 @@ RPG_State_t RPG_Map_Loader(bit_map_t* map_border_p, texture_map_t map)
         printf("bit_map is cannot opened");
         return RPG_Error;
     }
+    fgets(len, 98, fp);
 
-    for (uint8_t i = 1; i < 55; i++) {
+    for (uint8_t i = 0; i < 57; i++) {
         if (fgets(len, 98, fp) == NULL) {
             printf("fp cannot read line->%d\r\n", i);
         }
-        printf("%d -> ",i);
+        printf("%d -> ", i + 1);
         for (uint8_t j = 0; j < 96; j++) {
             map_border_p->bit_map[i][j] = len[j];
-            printf("%c",len[j]);
+            printf("%c", map_border_p->bit_map[i][j]);
         }
         printf("\r\n");
     }
