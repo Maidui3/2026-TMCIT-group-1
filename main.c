@@ -471,7 +471,7 @@ int main(void) {
         printf("HPとMPが全回復した！\n");
       }
     } else if (command == 4) {
-      if (player.level < 5) {
+      if (player.level < 25) {
         printf("\n");
         printf("魔王城の門番\n");
         printf("「まだ魔王と戦うには早すぎる！」\n");
